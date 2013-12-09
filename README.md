@@ -22,7 +22,7 @@ At the same time i were exploring fluent interfaces, then i managed to build thi
 
 To define a new function these are the steps. We are creating a simple function, with a parameter and a return variable like
 
-<pre class="brush: csharp;">
+<pre>
 int MyFunction(int param)
 {
 	return param;
@@ -33,7 +33,7 @@ int MyFunction(int param)
 * WithParameter<ParameterType>("Parameter name"): A parameter is declared. Multiple parameters can be declared
 * Returns("Return variable name"): The variable that will be returned 
 
-<pre class="brush: csharp;">
+<pre>
 var newFunction = Function.Create()
 		.WithParameter&lt;int>("param")
 		.Returns("param")
@@ -41,7 +41,7 @@ var newFunction = Function.Create()
 
 Than we can convert it to an expression and call it. The compile step will produce a method.
 
-<pre class="brush: csharp;">
+<pre>
 var newExpression = newFunction.ToExpression();
 var method = newExpression.Compile();
 
@@ -51,7 +51,7 @@ Assert.AreTrue(2,result);
 
 Or it's possible to build a lambda expression. Than it would be possible to call it with compilation support
 
-<pre class="brush: csharp;">
+<pre>
 var lambda = newFunction.ToLambda&lt;Func&lt;int,int>>();
 
 var result = lambda(2);
@@ -75,7 +75,7 @@ In short, in order of possible usage
 
 A body can be declared for the function. It will contain a series of CodeLine objects. CodeLine objects into the library implement the ICodeLine interface
 
-<pre class="brush: csharp;">
+<pre>
 var newFunction = Function.Create()
 		.WithParameter&lt;int>("param")
 		.WithBody(
@@ -96,7 +96,7 @@ In short, in order of possible usage
 
 It is possible to declare new simple variables. They will be assigned automatically with a default value. Here we create a variable of type int named intVariable, with the default value of 0.
 
-<pre class="brush: csharp;">
+<pre>
 var newFunction = Function.Create()
 	...
 	.WithBody(

@@ -2,6 +2,14 @@
 
 Available as [Nuget package](https://www.nuget.org/packages/ExpressionBuilder/)
 
+A fluent interface to create Lambda functions and expression.
+The documentation can be found on http://www.kendar.org/?p=/dotnet/expressionsbuilder.
+No knowledge of IL and System.Linq.Expression is needed. And even Lambda can be called.
+Available items are: Function parameters and Variables, Constants, String functions,
+Invocation of static and instance methods, If and While statements, Assignament,
+Conditions, Cast, New instance of arbitrary types. For debugging purposes it's possible
+to generate the source code for the function just created.
+
 ### Introduction
 
 Recently I had to create lambda functions on the fly. I could'nt use the various code providers like the CSharpCodeProvider, since there would have been too much code to write. So i started to explore the wonders of Expressions. But it's a steep hill to climb.
@@ -322,11 +330,6 @@ Some example will clarify :)
 	Assert.AreEqual("Second", type[1].Name);
 	Assert.AreEqual("First", type[0].Name);
 </pre>
-
-
-### Insiders view
-
-More to come shortly! As soon as i have the time to write how everything works here!
 
 ### Licensing
 

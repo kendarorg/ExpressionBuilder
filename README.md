@@ -2,6 +2,14 @@
 
 Available as [Nuget package](https://www.nuget.org/packages/ExpressionBuilder/)
 
+A fluent interface to create Lambda functions and expression.
+The documentation can be found on http://www.kendar.org/?p=/dotnet/expressionsbuilder.
+No knowledge of IL and System.Linq.Expression is needed. And even Lambda can be called.
+Available items are: Function parameters and Variables, Constants, String functions,
+Invocation of static and instance methods, If and While statements, Assignament,
+Conditions, Cast, New instance of arbitrary types. For debugging purposes it's possible
+to generate the source code for the function just created.
+
 ### Introduction
 
 Recently I had to create lambda functions on the fly. I could'nt use the various code providers like the CSharpCodeProvider, since there would have been too much code to write. So i started to explore the wonders of Expressions. But it's a steep hill to climb.
@@ -14,7 +22,7 @@ At the same time i were exploring fluent interfaces, then i managed to build thi
 
 To define a new function these are the steps. We are creating a simple function, with a parameter and a return variable like
 
-<pre class="brush: csharp;">
+<pre>
 int MyFunction(int param)
 {
 	return param;
@@ -25,7 +33,7 @@ int MyFunction(int param)
 * WithParameter<ParameterType>("Parameter name"): A parameter is declared. Multiple parameters can be declared
 * Returns("Return variable name"): The variable that will be returned 
 
-<pre class="brush: csharp;">
+<pre>
 var newFunction = Function.Create()
 		.WithParameter&lt;int>("param")
 		.Returns("param")
@@ -33,7 +41,7 @@ var newFunction = Function.Create()
 
 Than we can convert it to an expression and call it. The compile step will produce a method.
 
-<pre class="brush: csharp;">
+<pre>
 var newExpression = newFunction.ToExpression();
 var method = newExpression.Compile();
 
@@ -43,7 +51,7 @@ Assert.AreTrue(2,result);
 
 Or it's possible to build a lambda expression. Than it would be possible to call it with compilation support
 
-<pre class="brush: csharp;">
+<pre>
 var lambda = newFunction.ToLambda&lt;Func&lt;int,int>>();
 
 var result = lambda(2);
@@ -67,7 +75,7 @@ In short, in order of possible usage
 
 A body can be declared for the function. It will contain a series of CodeLine objects. CodeLine objects into the library implement the ICodeLine interface
 
-<pre class="brush: csharp;">
+<pre>
 var newFunction = Function.Create()
 		.WithParameter&lt;int>("param")
 		.WithBody(
@@ -88,7 +96,7 @@ In short, in order of possible usage
 
 It is possible to declare new simple variables. They will be assigned automatically with a default value. Here we create a variable of type int named intVariable, with the default value of 0.
 
-<pre class="brush: csharp;">
+<pre>
 var newFunction = Function.Create()
 	...
 	.WithBody(
@@ -323,10 +331,18 @@ Some example will clarify :)
 	Assert.AreEqual("First", type[0].Name);
 </pre>
 
+<<<<<<< HEAD
 
 ### Insiders view
 
 More to come shortly! As soon as i have the time to write how everything works here!
+=======
+### Licensing
+
+This is distributed with NO WARRANTY and under the terms of the GNU GPL and PHP licenses. If you use it a notice or some credit would be nice.
+
+You can get a copy of the GNU GPL at http://www.gnu.org/copyleft/gpl.html
+>>>>>>> 42bd56398269f1b27bcb12f447c3ffdb9e8eac65
 
 ### Download
 

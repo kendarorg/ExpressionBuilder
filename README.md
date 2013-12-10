@@ -331,18 +331,6 @@ Some example will clarify :)
 	Assert.AreEqual("First", type[0].Name);
 </pre>
 
-<<<<<<< HEAD
-
-### Insiders view
-
-More to come shortly! As soon as i have the time to write how everything works here!
-=======
-### Licensing
-
-This is distributed with NO WARRANTY and under the terms of the GNU GPL and PHP licenses. If you use it a notice or some credit would be nice.
-
-You can get a copy of the GNU GPL at http://www.gnu.org/copyleft/gpl.html
->>>>>>> 42bd56398269f1b27bcb12f447c3ffdb9e8eac65
 
 ### Download
 

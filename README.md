@@ -328,12 +328,6 @@ Some example will clarify :)
 
 More to come shortly! As soon as i have the time to write how everything works here!
 
-### Licensing
-
-This is distributed with NO WARRANTY and under the terms of the GNU GPL and PHP licenses. If you use it a notice or some credit would be nice.
-
-You can get a copy of the GNU GPL at http://www.gnu.org/copyleft/gpl.html
-
 ### Download
 
 See [kendar.org](http://www.kendar.org/?p=/dotnet/expressionsbuilder) for the latest changes.

@@ -27,7 +27,7 @@ namespace ExpressionBuilder.Test
 				)
 				.Returns("result");
 
-			Assert.AreEqual(expected, newExpression.ToString());
+			AssertString.AreEqual(expected, newExpression.ToString());
 
 			var lambda = newExpression.ToLambda<Func<int, string>>();
 			Assert.IsNotNull(lambda);
@@ -55,7 +55,7 @@ namespace ExpressionBuilder.Test
 				)
 				.Returns("result");
 
-			Assert.AreEqual(expected, newExpression.ToString());
+			AssertString.AreEqual(expected, newExpression.ToString());
 
 			var lambda = newExpression.ToLambda<Func<string, string, int>>();
 			Assert.IsNotNull(lambda);
@@ -89,7 +89,7 @@ namespace ExpressionBuilder.Test
 				)
 				.Returns("result");
 
-			Assert.AreEqual(expected, newExpression.ToString());
+			AssertString.AreEqual(expected, newExpression.ToString());
 
 			var lambda = newExpression.ToLambda<Func<string, string, string>>();
 			Assert.IsNotNull(lambda);

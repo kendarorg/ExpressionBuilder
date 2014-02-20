@@ -1,5 +1,6 @@
 ﻿using System;
 using ExpressionBuilder.Enums;
+using ExpressionBuilder.Utils;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ExpressionBuilder.Test
@@ -33,8 +34,8 @@ namespace ExpressionBuilder.Test
 						)
 				)
 				.Returns("first");
-			
-			Assert.AreEqual(expected, newExpression.ToString());
+
+			AssertString.AreEqual(expected, newExpression.ToString());
 
 			var lambda = newExpression.ToLambda<Func<int, int>>();
 			Assert.IsNotNull(lambda);
@@ -79,8 +80,8 @@ namespace ExpressionBuilder.Test
 								))
 				)
 				.Returns("first");
-			
-			Assert.AreEqual(expected, newExpression.ToString());
+
+			AssertString.AreEqual(expected, newExpression.ToString());
 
 			var lambda = newExpression.ToLambda<Func<int, int>>();
 			Assert.IsNotNull(lambda);

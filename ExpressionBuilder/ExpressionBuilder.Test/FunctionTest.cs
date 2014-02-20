@@ -22,7 +22,7 @@ namespace ExpressionBuilder.Test
 					.WithBody(CodeLine.Nop)
 					.Returns("first");
 
-			Assert.AreEqual(expected, newExpression.ToString());
+			AssertString.AreEqual(expected, newExpression.ToString());
 
 			var lambda = newExpression.ToLambda<Func<string, string, string>>();
 			Assert.IsNotNull(lambda);
@@ -43,7 +43,7 @@ namespace ExpressionBuilder.Test
 					.WithParameter<string>("second")
 					.WithBody(CodeLine.Nop);
 
-			Assert.AreEqual(expected, newExpression.ToString());
+			AssertString.AreEqual(expected, newExpression.ToString());
 
 			var lambda = newExpression.ToLambda<Action<string, string>>();
 			Assert.IsNotNull(lambda);
@@ -62,7 +62,7 @@ namespace ExpressionBuilder.Test
 			var newExpression = Function.Create()
 					.WithBody(CodeLine.Nop);
 
-			Assert.AreEqual(expected, newExpression.ToString());
+			AssertString.AreEqual(expected, newExpression.ToString());
 
 			var lambda = newExpression.ToLambda<Action>();
 			Assert.IsNotNull(lambda);

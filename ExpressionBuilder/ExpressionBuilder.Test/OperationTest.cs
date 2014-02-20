@@ -11,6 +11,9 @@ namespace ExpressionBuilder.Test
 			_name = GetType().Name;
 		}
 		private string _name;
+		public bool PrivateInvoked { get; set; }
+		public bool ProtectedInvoked { get; set; }
+
 		public SimpleObject(string name)
 		{
 			_name = name;
@@ -21,9 +24,19 @@ namespace ExpressionBuilder.Test
 			return _name;
 		}
 
-
 		public void SetName(string name)
 		{
+			_name = name;
+		}
+
+		private void PrivateMethod(string name)
+		{
+			PrivateInvoked = true;
+			_name = name;
+		}
+		protected void ProtectedMethod(string name)
+		{
+			ProtectedInvoked = true;
 			_name = name;
 		}
 	}
@@ -49,7 +62,7 @@ namespace ExpressionBuilder.Test
 				)
 				.Returns("result");
 
-			Assert.AreEqual(expected, newExpression.ToString());
+			AssertString.AreEqual(expected, newExpression.ToString());
 
 			var lambda = newExpression.ToLambda<Func<SimpleObject,string>>();
 			Assert.IsNotNull(lambda);
@@ -80,7 +93,7 @@ namespace ExpressionBuilder.Test
 				)
 				.Returns("result");
 
-			Assert.AreEqual(expected, newExpression.ToString());
+			AssertString.AreEqual(expected, newExpression.ToString());
 
 			var lambda = newExpression.ToLambda<Func<SimpleObject, string, string>>();
 			Assert.IsNotNull(lambda);
@@ -112,7 +125,7 @@ namespace ExpressionBuilder.Test
 				)
 				.Returns("result");
 
-			Assert.AreEqual(expected, newExpression.ToString());
+			AssertString.AreEqual(expected, newExpression.ToString());
 
 			var lambda = newExpression.ToLambda<Func<string, string>>();
 			Assert.IsNotNull(lambda);
@@ -143,7 +156,7 @@ namespace ExpressionBuilder.Test
 				)
 				.Returns("result");
 
-			Assert.AreEqual(expected, newExpression.ToString());
+			AssertString.AreEqual(expected, newExpression.ToString());
 
 			var lambda = newExpression.ToLambda<Func< string, string>>();
 			Assert.IsNotNull(lambda);
@@ -171,7 +184,7 @@ namespace ExpressionBuilder.Test
 				)
 				.Returns("second");
 
-			Assert.AreEqual(expected, newExpression.ToString());
+			AssertString.AreEqual(expected, newExpression.ToString());
 
 			var lambda = newExpression.ToLambda<Func<int, long, long>>();
 			Assert.IsNotNull(lambda);
@@ -201,7 +214,7 @@ namespace ExpressionBuilder.Test
 				)
 				.Returns("second");
 
-			Assert.AreEqual(expected, newExpression.ToString());
+			AssertString.AreEqual(expected, newExpression.ToString());
 
 			var lambda = newExpression.ToLambda<Func<int, long, long>>();
 			Assert.IsNotNull(lambda);
@@ -239,7 +252,7 @@ namespace ExpressionBuilder.Test
 				)
 				.Returns("result");
 
-			Assert.AreEqual(expected, newExpression.ToString());
+			AssertString.AreEqual(expected, newExpression.ToString());
 
 			var lambda = newExpression.ToLambda<Func<string, string, string>>();
 			Assert.IsNotNull(lambda);
@@ -267,7 +280,7 @@ namespace ExpressionBuilder.Test
 				)
 				.Returns("result");
 
-			Assert.AreEqual(expected, newExpression.ToString());
+			AssertString.AreEqual(expected, newExpression.ToString());
 
 			var lambda = newExpression.ToLambda<Func<int, bool>>();
 			Assert.IsNotNull(lambda);
@@ -275,6 +288,70 @@ namespace ExpressionBuilder.Test
 			Assert.IsFalse(result); 
 			result = lambda(2012);
 			Assert.IsTrue(result);
+		}
+
+		[TestMethod]
+		public void ItShouldPossibleToInvokePrivateMethodsOnObjects()
+		{
+			const string expected =
+@"public System.String Call(ExpressionBuilder.Test.SimpleObject par, System.String name)
+{
+  System.String result;
+  par.PrivateMethod(name);
+  result = par.GetName();
+  return result;
+}";
+
+			var newExpression = Function.Create()
+				.WithParameter<SimpleObject>("par")
+				.WithParameter<string>("name")
+				.WithBody(
+					CodeLine.CreateVariable<string>("result"),
+					Operation.Invoke("par", "PrivateMethod", Operation.Variable("name")),
+					CodeLine.Assign("result", Operation.InvokeReturn("par", "GetName"))
+				)
+				.Returns("result");
+
+			AssertString.AreEqual(expected, newExpression.ToString());
+
+			var lambda = newExpression.ToLambda<Func<SimpleObject, string, string>>();
+			Assert.IsNotNull(lambda);
+			var so = new SimpleObject();
+			var result = lambda(so,"paramName");
+			Assert.AreEqual("paramName", result);
+			Assert.IsTrue(so.PrivateInvoked);
+		}
+
+		[TestMethod]
+		public void ItShouldPossibleToInvokeProtectedMethodsOnObjects()
+		{
+			const string expected =
+@"public System.String Call(ExpressionBuilder.Test.SimpleObject par, System.String name)
+{
+  System.String result;
+  par.ProtectedMethod(name);
+  result = par.GetName();
+  return result;
+}";
+
+			var newExpression = Function.Create()
+				.WithParameter<SimpleObject>("par")
+				.WithParameter<string>("name")
+				.WithBody(
+					CodeLine.CreateVariable<string>("result"),
+					Operation.Invoke("par", "ProtectedMethod", Operation.Variable("name")),
+					CodeLine.Assign("result", Operation.InvokeReturn("par", "GetName"))
+				)
+				.Returns("result");
+
+			AssertString.AreEqual(expected, newExpression.ToString());
+
+			var lambda = newExpression.ToLambda<Func<SimpleObject, string, string>>();
+			Assert.IsNotNull(lambda);
+			var so = new SimpleObject();
+			var result = lambda(so, "paramName");
+			Assert.AreEqual("paramName", result);
+			Assert.IsTrue(so.ProtectedInvoked);
 		}
 	}
 }

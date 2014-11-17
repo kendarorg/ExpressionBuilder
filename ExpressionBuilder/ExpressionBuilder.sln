@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31010.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpressionBuilder.Test", "ExpressionBuilder.Test\ExpressionBuilder.Test.csproj", "{499EAC63-E44E-48B6-85C4-5F6E5D2185E3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{BAB02ADF-B910-418C-BD4D-D76B5EA633E7}"
@@ -9,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{BAB02A
 		.nuget\NuGet.exe = .nuget\NuGet.exe
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpressionBuilder", "ExpressionBuilder\ExpressionBuilder.csproj", "{F333183C-4688-4FA2-8346-DD62CBCF2896}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,6 +24,10 @@ Global
 		{499EAC63-E44E-48B6-85C4-5F6E5D2185E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{499EAC63-E44E-48B6-85C4-5F6E5D2185E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{499EAC63-E44E-48B6-85C4-5F6E5D2185E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F333183C-4688-4FA2-8346-DD62CBCF2896}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F333183C-4688-4FA2-8346-DD62CBCF2896}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F333183C-4688-4FA2-8346-DD62CBCF2896}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F333183C-4688-4FA2-8346-DD62CBCF2896}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

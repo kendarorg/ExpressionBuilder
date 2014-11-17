@@ -14,42 +14,41 @@
 
 
 using System;
-using System.ComponentModel;
-using System.Text;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Linq.Expressions;
+using ExpressionBuilder.Fluent;
+using ExpressionBuilder.Parser;
+using ExpressionBuilder.Utils;
 
-namespace ExpressionBuilder.Test
+namespace ExpressionBuilder.Operations
 {
-	public static class AssertString
+	public class OperationCast : IRightable
 	{
-		public static void AreEqual(string expected, string actual)
+		internal IOperation Variable;
+		internal Type ToType;
+
+		public OperationCast(IOperation variable, Type toType)
 		{
-			expected = expected.Replace("\r\n", "\n");
-			actual = actual.Replace("\r\n", "\n");
-			if (expected.Length == actual.Length)
-			{
-				for (var i = 0; i < expected.Length; i++)
-				{
-					var expectedChar = (int) expected[i];
-					var actualChar = (int)actual[i];
-					if (actualChar != expectedChar)
-					{
-						break;
-					}
-				}
-				return;
-			}
-			throw new AssertFailedException(string.Format("AssertString.AreEqual\nExpected <{0}>\nActual  <{1}>", expected,
-				actual));
+			Variable = variable;
+			ToType = toType;
 		}
 
-		public static string UTF8ToAscii(string text)
+		public string ToString(ParseContext context)
 		{
-			var utf8 = Encoding.UTF8;
-			Byte[] encodedBytes = utf8.GetBytes(text);
-			Byte[] convertedBytes = Encoding.Convert(Encoding.UTF8, Encoding.ASCII, encodedBytes);
-
-			return Encoding.ASCII.GetString(convertedBytes);
+			return "((" + ReflectionUtil.TypeToString(ToType) + ")" + Variable.ToString(context) + ")";
 		}
+
+		public Expression ToExpression(ParseContext context)
+		{
+			//	var var = context.GetVariable(Variable.Name);
+			var expr = Variable.ToExpression(context);
+			return Expression.Convert(expr, ToType);
+		}
+
+		public void PreParseExpression(ParseContext context)
+		{
+			ParsedType = ToType;
+		}
+
+		public Type ParsedType { get; private set; }
 	}
 }

@@ -14,42 +14,38 @@
 
 
 using System;
-using System.ComponentModel;
-using System.Text;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Linq.Expressions;
+using ExpressionBuilder.Fluent;
+using ExpressionBuilder.Parser;
 
-namespace ExpressionBuilder.Test
+namespace ExpressionBuilder.CodeLines
 {
-	public static class AssertString
+	public class CreateReturn : ICodeLine
 	{
-		public static void AreEqual(string expected, string actual)
+		internal CreateReturn()
 		{
-			expected = expected.Replace("\r\n", "\n");
-			actual = actual.Replace("\r\n", "\n");
-			if (expected.Length == actual.Length)
+			ParsedType = null;
+		}
+
+		public string ToString(ParseContext context)
+		{
+			if (!string.IsNullOrWhiteSpace(context.ReturnVariable))
 			{
-				for (var i = 0; i < expected.Length; i++)
-				{
-					var expectedChar = (int) expected[i];
-					var actualChar = (int)actual[i];
-					if (actualChar != expectedChar)
-					{
-						break;
-					}
-				}
-				return;
+				return "return " + context.ReturnVariable;
 			}
-			throw new AssertFailedException(string.Format("AssertString.AreEqual\nExpected <{0}>\nActual  <{1}>", expected,
-				actual));
+			return "return";
 		}
 
-		public static string UTF8ToAscii(string text)
+		public Expression ToExpression(ParseContext context)
 		{
-			var utf8 = Encoding.UTF8;
-			Byte[] encodedBytes = utf8.GetBytes(text);
-			Byte[] convertedBytes = Encoding.Convert(Encoding.UTF8, Encoding.ASCII, encodedBytes);
-
-			return Encoding.ASCII.GetString(convertedBytes);
+			return Expression.Goto(context.ReturnLabel);
 		}
+
+		public void PreParseExpression(ParseContext context)
+		{
+
+		}
+
+		public Type ParsedType { get; private set; }
 	}
 }

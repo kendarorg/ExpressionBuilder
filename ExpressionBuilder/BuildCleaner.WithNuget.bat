@@ -1,1 +1,0 @@
-BuildCleaner -dp _ReSharper*.* -ip bin;obj;.git;TestResults -z

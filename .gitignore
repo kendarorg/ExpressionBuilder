@@ -16,6 +16,7 @@ TestResults
 .report
 
 # Build results
+tmp_nuget/
 [Dd]ebug/
 [Rr]elease/
 *_i.c

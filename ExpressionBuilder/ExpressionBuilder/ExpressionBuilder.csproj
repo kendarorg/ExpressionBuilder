@@ -10,7 +10,7 @@
     <RootNamespace>ExpressionBuilder</RootNamespace>
     <AssemblyName>ExpressionBuilder</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-	<!--TargetFrameworkVersion
+    <!--TargetFrameworkVersion
 		Condition="'$(TargetFrameworkVersion)' = ''">v4.5</TargetFrameworkVersion-->
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -51,6 +51,7 @@
     <Compile Include="Conditions\MultiCondition.cs" />
     <Compile Include="CodeLines\CreateReturn.cs" />
     <Compile Include="Fluent\IWhile.cs" />
+    <Compile Include="Operations\OperationNewArrayInit.cs" />
     <Compile Include="StringOperation.cs" />
     <Compile Include="Utils\ExpressionUtil.cs" />
     <Compile Include="Utils\LambdaPropertyDescriptor.cs" />

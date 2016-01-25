@@ -1,6 +1,6 @@
 @echo off >NUL 2>NUL
 
-SET VS_VERSION=12.0
+SET VS_VERSION=14.0
 SET VERBOSITY=FALSE
 
 echo Setting up environment variables
@@ -11,6 +11,8 @@ SET UTILS_ROOT=%CD%
 SET VS_NAME=VSPATH
 
 VisualStudioIdentifier %VS_VERSION% %VS_NAME% vs.bat"
+
+pause
 call vs.bat
 if "%VERBOSITY%"=="TRUE" (
     del /q vs.bat
@@ -29,6 +31,7 @@ SET VSPATH=%CD%
 CD %CURRENT_DIR%
 
 call "%VSPATH%\Tools\VsDevCmd.bat"
+
 
 echo @echo off ^>NUL 2^>NUL > %UTILS_ROOT%\cleanup.bat
 

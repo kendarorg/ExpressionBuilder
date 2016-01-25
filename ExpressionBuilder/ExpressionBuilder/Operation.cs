@@ -146,8 +146,12 @@ namespace ExpressionBuilder
 		{
 			return Cast(Constant(value), typeof(TData));
 		}
+        public static IRightable CreateArray(Type dataType, params IRightable[] variables)
+		{
+			return new OperationNewArrayInit(dataType, variables );
+		}
 
-		public static IRightable CreateInstance(Type dataType, params IRightable[] variables)
+    public static IRightable CreateInstance(Type dataType, params IRightable[] variables)
 		{
 			return new OperationNew(dataType, variables);
 		}

@@ -10,6 +10,10 @@ Invocation of static and instance methods, If and While statements, Assignament,
 Conditions, Cast, New instance of arbitrary types. For debugging purposes it's possible
 to generate the source code for the function just created.
 
+## If you like it Buy me a coffe :)
+
+[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/paypalme/kendarorg/1)
+
 ### Introduction
 
 Recently I had to create lambda functions on the fly. I could'nt use the various code providers like the CSharpCodeProvider, since there would have been too much code to write. So i started to explore the wonders of Expressions. But it's a steep hill to climb.
